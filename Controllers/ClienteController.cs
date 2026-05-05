@@ -24,7 +24,7 @@ namespace OrderManagement.Controllers
         }
 
         [HttpPost("Crear")]
-        public async Task<IActionResult> Create(Cliente itemCliente)
+        public async Task<IActionResult> Create([FromBody] Cliente itemCliente)
         {
             Cliente? clienteCreado = await _repository.CrearClienteAsync(itemCliente);
             return Ok(clienteCreado);

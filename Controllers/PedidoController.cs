@@ -34,31 +34,38 @@ namespace OrderManagement.Controllers
             return Ok(pedido);
         }
 
-        [HttpPost("Pedidos")]
+        [HttpPost("CrearPedidos")]
         public async Task<IActionResult> Create([FromBody] Pedido itemPedido)
         {
             Pedido? pedido = await _repository.CrearPedidoAsync(itemPedido.ClienteId, itemPedido.PedidoDetalles);
             return Ok(pedido);
         }
 
-        [HttpGet("Productos")]
+        [HttpGet("ObtenerProductos")]
         public async Task<IActionResult> GetAllProductos()
         {
             List<Producto> productos = await _productoRepository.ObtenerProductoAsync();
             return Ok(productos);
         }
 
-        [HttpPost("Productos")]
+        [HttpPost("CrearProductos")]
         public async Task<IActionResult> CreateProducto([FromBody] Producto itemProducto)
         {
             Producto? producto = await _productoRepository.CrearProductoAsync(itemProducto);
             return Ok(producto);
         }
 
-        [HttpDelete("Eliminar Pedido")]
+        [HttpDelete("EliminarPedido")]
         public async Task<IActionResult> EliminarPedido(int id) 
         {
             string mensaje = await _repository.Eliminar(id);
+            return Ok(mensaje);
+        }
+
+        [HttpDelete("EliminarProducto")]
+        public async Task<IActionResult> EliminarProducto(int id) 
+        {
+            string mensaje = await _productoRepository.Eliminar(id);
             return Ok(mensaje);
         }
     }
